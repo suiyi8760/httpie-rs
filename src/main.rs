@@ -78,14 +78,14 @@ async fn post(client: Client, args: &Post) -> Result<()> {
 }
 
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<()> {
     let opts = Opts::parse();
     println!("{:?}", opts);
 
     let client = Client::new();
     let result = match opts.subcmd {
-        Subcmd::Get(ref args) => todo!(),
-        Subcmd::Post(ref args) => todo!(),
+        Subcmd::Get(ref args) => get(client, args).await?,
+        Subcmd::Post(ref args) => post(client, args).await?,
     };
 
     Ok(result)
